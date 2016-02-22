@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- <html lang="cl" style="font-size: 16px"> -->
+<html lang="cl" style="font-size: 100%">
+
+<head>
+	<meta charset="utf-8" />
+	<title>fcoo.dk - Modernizr-Mediaquery - Demo</title>
+
+
+	<meta http-equiv='x-dns-prefetch-control' content='on'>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+  <link rel="stylesheet" type="text/css" href="../src/modernizr-mediaquery.css" />
+	<style>
+		pre : {
+			border: 1px solid black;
+		}
+		.landscape .green-on-landscape { color: green; }
+		.portrait .red-on-portrait { color: red; }
+	</style>
+
+</head>
+
+<body>
+
+	<div class="show-for-landscape">This device is in LANDSCAPE mode. <code>class="show-for-landscape"</code></div>
+	<div class="show-for-portrait">This device is in PORTRAIT mode. <code>class="show-for-portrait"</code></div>
+
+<hr>
+<pre>
+CSS:
+.landscape .green-on-landscape { color: green; }
+.portrait .red-on-portrait { color: red; }
+</pre>
+<div class="green-on-landscape">This is GREEN in LANDSCAPE mode. <code>class="green-on-landscape"</code></div>
+<div class="red-on-portrait">This is RED in PORTRAIT mode. <code>class="red-on-portrait"</code></div>
+<hr>
+	
+	<div class="show-for-mobile">This device IS a MOBILE device.. <code>class="show-for-mobile"</code></div>
+	<div class="show-for-phone">..and it is a PHONE. <code>class="show-for-phone"</code></div>
+	<div class="show-for-tablet">..and it is a TABLET. <code>class="show-for-tablet"</code></div>
+	<div class="show-for-no-mobile">This device is NOT a MOBILE device.. <code>class="show-for-no-mobile"</code></div>
+
+  <div class="show-for-small">The screen IS a SMALL screen. <code>class="show-for-small"</code></div>
+  <div class="hide-for-small">The screen is NOT a SMALL screen. <code>class="hide-for-small"</code></div>
+
+	<div class="show-for-medium">The screen IS a MEDIUM screen. <code>class="show-for-medium"</code></div>
+  <div class="hide-for-medium">The screen is NOT a MEDIUM screen. <code>class="hide-for-medium"</code></div>
+	<div class="show-for-medium-down">The screen is a MEDIUM OR smaller screen. <code>class="show-for-medium-down"</code></div>
+
+	<div class="show-for-large">The screen IS a LARGE screen. <code>class="show-for-large"</code></div>
+	<div class="hide-for-large">The screen is NOT a LARGE screen. <code>class="hide-for-large"</code></div>
+	<div class="show-for-large-down">The screen is a LARGE OR smaller screen. <code>class="show-for-large-down"</code></div>
+
+	<div class="show-for-xlarge">The screen IS a XLARGE screen. <code>class="show-for-xlarge"</code></div>
+	<div class="hide-for-xlarge">The screen is NOT a XLARGE screen. <code>class="hide-for-xlarge"</code></div>
+	<div class="show-for-xlarge-down">The screen is a XLARGE OR smaller screen. <code>class="show-for-xlarge-down"</code></div>
+
+	<div class="show-for-xxlarge">The screen IS a XXLARGE screen. <code>class="show-for-xxlarge"</code></div>
+	<div class="hide-for-xxlarge">The screen is NOT a XXLARGE screen. <code>class="hide-for-xxlarge"</code></div>
+	<div class="show-for-xxlarge-down">The screen is a XXLARGE OR smaller screen. <code>class="show-for-xxlarge-down"</code></div>
+
+	<div class="hide-for-print">This text is only on the SCREEN. <code>class="hide-for-print"</code></div>
+	<div class="show-for-print">This text is only on the PRINT. <code>class="show-for-print"</code></div>
+	
+	<br>
+	<br>
+	<div id="info"></div>
+
+	<div style="width:95%; border:1px solid blue; font-size:100%">
+		<h3>Normal contents</h3>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+		<button>This is a 'normal' button</button>
+	</div>
+	<br>
+	<div id="scaled" style="width:95%; border:1px solid red; font-size:100%">
+		<h3>Scaled contents</h3>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+		<button style="font-size:0.833em">This is a 'normal' button</button>
+		<button>This is a 'default' button</button>
+	</div>
+
+	<script src="bower_components.js"></script>
+	<!-- <script src="../src/_modernizr-custom.js"></script> -->
+	<script src="modernizr-custom.js"></script>
+	<script src="../src/modernizr-mediaquery.js"></script>
+
+	<script>
+		(function ($, window, document, undefined) {
+			/******************************************
+			Initialize/ready 
+			*******************************************/
+			$(function() { //"$( function() { ... });" is short for "$(document).ready( function(){...});"
+			/*		
+				//Events to detect orientation
+				$( window ).on( "orientationchange", function( event ) {
+					$( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+				});
+ 
+				 You can also manually force this event to fire.
+				$( window ).orientationchange();
+			*/
+
+			var mq = new window.ModernizrMQDevice();
+
+			mq.on( 'landscape portrait', function( m ){ 
+				alert('Is now in '+m+'-mode') ;
+			});
+			mq._onMediaQuery();
+			var info = '<table border=0>';
+
+			info += '<tr><td>screen width</td><td>'+mq.screen_width +'</td></tr>';
+			info += '<tr><td>screen height</td><td>'+mq.screen_height	 +'</td></tr>';
+
+			info += '<tr><td>dpi resolution</td><td>'+mq.dpi+'dpi</td></tr>';
+
+			info += '<tr><td>Scale</td><td>'+mq.scale+'</td></tr>';
+			info += '<tr><td>device pixel ratio</td><td>'+mq.dpr +'</td></tr>';
+
+			var property, propertyList = ['isDesktop', 'isMobile', 'mobileName', 'isPhone', 'phoneName', 'isTablet', 'tabletName',  'mobileGrade', 'userAgent', 'isWindows', 'isIos', 'isAndroid', 'os','browser_version'];
+			for (var i=0; i<propertyList.length; i++ ){
+				property = propertyList[i];
+				info += '<tr><td>'+property+'</td><td>'+mq[property]+'</td></tr>';			
+			}
+			
+			/*
+			http://www.w3schools.com: 97% of our visitors have a screen resolution of 1024x768 pixels or higher:
+			Google: > 30% has 1366*768
+			*/
+
+			info += '</table>';
+			$('#info').html(info);		
+
+
+			$('#scaled').css('font-size', mq.scale+'%');
+
+		}); //End of initialize/ready
+	}(jQuery, this, document));	
+</script>
+
+
+</body>
+</html>
