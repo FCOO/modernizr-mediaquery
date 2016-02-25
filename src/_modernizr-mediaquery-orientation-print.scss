@@ -1,0 +1,32 @@
+/***********************************************
+	_modernizr-mediaquery-orientation_print.scss, 
+
+	(c) 2015, FCOO
+
+	https://github.com/FCOO/modernizr-mediaquery
+	https://github.com/FCOO
+
+	Media-query for orientation and print
+
+************************************************/
+
+
+// Orientation targeting - 'landscape' and 'portrait'
+@include -ms-show-and-hide( (landscape), false, true,  block);
+@include -ms-show-and-hide( (portrait),  false, false, block);
+
+@media screen and (orientation: landscape) {
+	@include -ms-show-and-hide( (landscape), false, true,  block);
+	@include -ms-show-and-hide( (portrait),  false, false, block);
+}
+@media screen and (orientation: portrait) {
+	@include -ms-show-and-hide( (landscape), false, false, block);
+	@include -ms-show-and-hide( (portrait), false,  true,  block);
+}
+
+// Print visibility - default is display: none
+.show-for-print { display: none !important; }
+@media print {
+	@include -ms-show-and-hide( (print), false, true, block);
+}
+

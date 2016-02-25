@@ -1,2 +1,0 @@
-# modernizr-mediaquery
-MANGLER

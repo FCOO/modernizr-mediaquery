@@ -7,66 +7,33 @@
 	https://github.com/FCOO
 
 ************************************************/
-//MODERNIZR-SASS - http://github.com/FCOO/modernizr-scss
-@import "../bower_components/modernizr-scss/dist/modernizr-scss";
 
+//Adjust default variable values
+//$html-font-size		: 16px;
+//$create-FIRST-up	: false;	//When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+//$create-LAST-down	: false;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
 
-$html-font-size		: 16px;
-$create-FIRST-up	: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
-$create-LAST-down	: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+//Breakpoints taken from uikit
+//$breakpoints: (
+//  mini		:    0px,	//Phone portrait
+//  small		:  480px,	//Phone landscape
+//  medium	:  768px,	//Tablets portrait
+//  large		:  960px,	//Table landscape + desttop
+//  xlarge	: 1200px	//Large desttop
+//);
 
-$breakpoints: (
-  small: 0,
-  medium: 640px,
-  large: 1024px,
-  xlarge: 1200px,
-  xxlarge: 1440px
-) !default;
+@import "modernizr-mediaquery-variables";
 
+@import "modernizr-mediaquery-orientation-print";
 
-//******************************************************
-@function strip-unit($number) {
-	@if type-of($number) == 'number' and not unitless($number) {
-		@return $number / ($number * 0 + 1);
-	}
-	@return $number;
-}
-
-//******************************************************
-// Converts a pixel or unitless value to em, for use in breakpoints.
-@function -mmqd-px-to-em($value) {
-	$base: $html-font-size;
-	@if unit($base) == '%' {
-		$base: ($base / 100%) * 16px;
-	}
-  @return strip-unit($value) / strip-unit($base) * 1em;
-}
-
-//******************************************************
-// function -mmqd-serialize
-// This function is a modified copy of @function -zf-bp-serialize (..) by Foundation 
-@function -mmqd-serialize($map) {
-  $str: '';
-  @each $key, $value in $map {
-    $str: $str + $key + '=' + $value + '&';
-  }
-  $str: str-slice($str, 1, -2);
-  @return $str;
-}
-
-
-//Extract the name and min-value from $breakpoints
-$bp-names: ();
-$bp-min-values: ();
-@each $size in map-keys($breakpoints) {
-	$bp-names			: append( $bp-names, $size );
-	$bp-min-values: append( $bp-min-values, map-get($breakpoints, $size) );
-}
 
 //$media-queries-map = (name: media-query, name2:media-query2,...,nameN: mediaqueryN)
 $media-queries-map: ();
 
-//Add SIZE, SIZE-down, and SIZE-up to the list of modernizr-tests
+//$min-max-map = (name: min1_max1, name2:min2_max2,...,nameN: minN_maxN)
+$min-max-map: ();
+
+//Add css for SIZE, SIZE-down, and SIZE-up
 @for $i from 1 through length($bp-names) {
 	$is-first: $i == 1;
 	$is-last: $i == length($bp-names);
@@ -75,98 +42,79 @@ $media-queries-map: ();
 	$name-up	: $name + '-up';
 	$name-down: $name + '-down';
 
-	$min: -mmqd-px-to-em( nth($bp-min-values, $i) );
-	$max: 0em;
+	$minPx: nth($bp-min-values, $i);
+	$min	: -mmq-px-to-em( $minPx );
+	$maxPx: 0px;
+	$max	: 0em;
 	@if not $is-last {
-		$max: -mmqd-px-to-em( nth($bp-min-values, $i+1) - 1 );
+		$maxPx:	nth($bp-min-values, $i+1) - 1;
+		$max	: -mmq-px-to-em( $maxPx );
 	}
 	$mq			: '';
 	$mq-up	: '';
 	$mq-down: '';
 
-	@if $min > 0 {
+	@if $min > 0em {
 		$mq		: $mq			+ ' and (min-width: #{$min})';
 		$mq-up: $mq-up	+ ' and (min-width: #{$min})';
 	}
-	@if $max > 0 {
+	@if $max > 0em {
 		$mq			: $mq				+ ' and (max-width: #{$max})';
 		$mq-down: $mq-down	+ ' and (max-width: #{$max})';
 	}
 
-	//Adding classes for SIZE
-	@media screen#{$mq}{
-		@include -ms-show-and-hide( ($name), false, true);
-	}
-	@media not all#{$mq}{
-		@include -ms-show-and-hide( ($name), false, false);
-	}
-
+	//Add the rules for $name eq. .small show-on-small { display: block }
+	@include show-and-hide-for-modernizr-test( $name, html );
+	
 	//Adding the query to $media-queries-map
 	$media-queries-map: map-merge($media-queries-map, ($name: 'screen' + $mq));
+
+	//Adding the min-max to $min-max-map
+	$min-max-map: map-merge($min-max-map, ($name: $minPx+ '_' + $maxPx));
 
 	
 	//Adding classes for SIZE-down
 	@if not $is-last or $create-LAST-down {
-		@media screen#{$mq-down}{
-			@include -ms-show-and-hide( ($name-down), false, true);
-		}
-		@media not all#{$mq-down}{
-			@include -ms-show-and-hide( ($name-down), false, false);
-		}
+
+		//Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
+		@include show-and-hide-for-modernizr-test( $name-down, html );
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-down: 'screen' + $mq-down));
+		
+		//Adding the min-max to $min-max-map
+		$min-max-map: map-merge($min-max-map, ($name-down: '0_' + $maxPx));
+
 	}
 
 	//Adding classes for SIZE-up
 	@if not $is-first or $create-FIRST-up {
-		@media screen#{$mq-up}{
-			@include -ms-show-and-hide( ($name-up), false, true);
-		}
-		@media not all#{$mq-up}{
-			@include -ms-show-and-hide( ($name-up), false, false);
-		}
+
+		//Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
+		@include show-and-hide-for-modernizr-test( $name-up, html );
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-up: 'screen' + $mq-up));
+
+		//Adding the min-max to $min-max-map
+		$min-max-map: map-merge($min-max-map, ($name-up: $minPx+ '_0'));
 	}
+
+
 } //@for $i from 1 through length($bp-names) {...
 
 
-//******************************************************************************************
-//Create show/hide-for-TEST and show/hide-for-no-TEST, TEST = the Modernizr tests installed
-//$modernizr-tests = the list of tests added to Modernizr by modernizr-mediaquery.js
-$modernizr-tests: desktop, mobile, phone, tablet, windows, ios, android, mobilegradea; 
-@each $modernizr-test in $modernizr-tests {
-	@include show-and-hide-for-modernizr-test( $modernizr-test, html );
-}
-
-//******************************************************************************************
-// Orientation targeting - 'landscape' and 'portrait'
-@include -ms-show-and-hide( (landscape), false, true,  block);
-@include -ms-show-and-hide( (portrait),  false, false, block);
-
-@media screen and (orientation: landscape) {
-	@include -ms-show-and-hide( (landscape), false, true,  block);
-	@include -ms-show-and-hide( (portrait),  false, false, block);
-}
-@media screen and (orientation: portrait) {
-	@include -ms-show-and-hide( (landscape), false, false, block);
-	@include -ms-show-and-hide( (portrait), false,  true,  block);
-}
-//Adding the query to $media-queries-map
-$media-queries-map: map-merge( $media-queries-map, ('landscape': 'screen and (orientation: landscape)'));
+//Adding the orientation-queries to $media-queries-map
+$media-queries-map: map-merge( $media-queries-map, ('landscape'	: 'screen and (orientation: landscape)'));
 $media-queries-map: map-merge( $media-queries-map, ('portrait'	: 'screen and (orientation: portrait)'));
 
+//Adding the orientation-queries to $min-max-map
+$min-max-map: map-merge($min-max-map, ('landscape': '0_1_1' ));
+$min-max-map: map-merge($min-max-map, ('portrait'	: '0_1_0_1' ));
 
-//******************************************************************************************
-// Print visibility - default is display: none
-.show-for-print { display: none !important; }
-@media print {
-	@include -ms-show-and-hide( (print), false, true, block);
-}
 
-// The breakpoints are applied to a <meta> tag, which is read by the ModernizrMQDevice js-object-class. Applied from Foundation 6
-.modernizr-mediaquery {
-	font-family: -mmqd-serialize($media-queries-map);
-}
+// The media-query-list ($media-queries-map) and min-max-list ($min-max-map) are applied to a <meta> tag, which is read by the ModernizrMediaquery js-object-class. Applied from Foundation 6
+.modernizr-mediaquery-media-query	{	font-family: -mmq-serialize($media-queries-map);	}
+.modernizr-mediaquery-min-max			{	font-family: -mmq-serialize($min-max-map);				}
+
+

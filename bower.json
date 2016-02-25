@@ -1,6 +1,6 @@
 {
   "name": "modernizr-mediaquery",
-  "version": "1.5.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/FCOO/modernizr-mediaquery",
   "authors": [
     "Niels Holt niels@steenbuchholt.dk"
@@ -16,14 +16,9 @@
   },
   "dependencies": {
     "jquery": "latest",
-    "device.js": "devicejs#~0.2.7",
-    "mobile-detect": "latest",
     "global-events": "FCOO/global-events#latest"
   },
   "devDependencies": {
-    "bourbon": "latest",
-    "modernizr-mixin": "latest",
-    "foundation-sites": "~6.1.1",
     "modernizr-scss": "https://github.com/FCOO/modernizr-scss.git#latest"
   },
   "license": "MIT",

@@ -1,0 +1,88 @@
+/***********************************************
+	modernizr-mediaquery-pure.scss, 
+
+	(c) 2015, FCOO
+
+	https://github.com/FCOO/modernizr-mediaquery
+	https://github.com/FCOO
+
+************************************************/
+
+//Adjust default variable values
+//$html-font-size		: 16px;
+//$create-FIRST-up	: false;	//When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+//$create-LAST-down	: false;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+
+//$breakpoints: (
+//  small: 0,
+//  medium: 640px,
+//  large: 1024px,
+//  xlarge: 1200px,
+//  xxlarge: 1440px
+//);
+
+
+@import "modernizr-mediaquery-variables";
+
+@import "modernizr-mediaquery-orientation-print";
+
+//Add SIZE, SIZE-down, and SIZE-up
+@for $i from 1 through length($bp-names) {
+	$is-first: $i == 1;
+	$is-last: $i == length($bp-names);
+
+	$name			: nth($bp-names, $i);
+	$name-up	: $name + '-up';
+	$name-down: $name + '-down';
+
+	$minPx: nth($bp-min-values, $i);
+	$min	: -mmq-px-to-em( $minPx );
+	$maxPx: 0px;
+	$max	: 0em;
+	@if not $is-last {
+		$maxPx:	nth($bp-min-values, $i+1) - 1;
+		$max	: -mmq-px-to-em( $maxPx );
+	}
+	$mq			: '';
+	$mq-up	: '';
+	$mq-down: '';
+
+	@if $min > 0em {
+		$mq		: $mq			+ ' and (min-width: #{$min})';
+		$mq-up: $mq-up	+ ' and (min-width: #{$min})';
+	}
+	@if $max > 0em {
+		$mq			: $mq				+ ' and (max-width: #{$max})';
+		$mq-down: $mq-down	+ ' and (max-width: #{$max})';
+	}
+
+	
+	//Adding classes for SIZE
+	@media screen#{$mq}{
+		@include -ms-show-and-hide( ($name), false, true);
+	}
+	@media not all#{$mq}{
+		@include -ms-show-and-hide( ($name), false, false);
+	}
+
+	//Adding classes for SIZE-down
+	@if not $is-last or $create-LAST-down {
+		@media screen#{$mq-down}{
+			@include -ms-show-and-hide( ($name-down), false, true);
+		}
+		@media not all#{$mq-down}{
+			@include -ms-show-and-hide( ($name-down), false, false);
+		}
+	}
+
+	//Adding classes for SIZE-up
+	@if not $is-first or $create-FIRST-up {
+		@media screen#{$mq-up}{
+			@include -ms-show-and-hide( ($name-up), false, true);
+		}
+		@media not all#{$mq-up}{
+			@include -ms-show-and-hide( ($name-up), false, false);
+		}
+	}
+} //@for $i from 1 through length($bp-names) {...
+

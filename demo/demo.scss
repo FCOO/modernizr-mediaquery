@@ -1,0 +1,68 @@
+/*
+
+DEMO.scss for github/fcoo/modernizr-mediaquery/demo/index.html
+
+*/
+body {
+	padding: 0;
+	margin: 0;
+}
+pre { border: 1px solid black; }
+.center { text-align: center }
+
+.landscape .green-on-landscape { color: green; }
+.portrait .red-on-portrait { color: red; }
+
+#info { 
+	border:0.3em solid; background-color:white;
+
+	.landscape & { border-color: green; }
+	.portrait & { border-color: red; }
+}
+
+body {	
+	.mini		&	{ background-color: blue;		}
+	.small	&	{ background-color: green;	}
+	.medium	&	{ background-color: yellow; }
+	.large	&	{ background-color: orange; }
+	.xlarge	&	{ background-color: red;		}
+}
+
+.button-container {
+	position: absolute;
+	right: 0; top: 0;
+	z-index: 10;
+	width: 5rem;
+	border: 0.1rem solid black;
+
+	button {
+		width: 2rem;
+		height: 2rem;
+		font-size: 1rem;
+	}
+}
+
+$width : 28rem;
+.bottom-container {
+	position: absolute;
+	left: 50%; bottom: 0;
+	margin-left: - $width/2; 
+	z-index: 10;
+	width: $width;
+	
+	box-sizing: border-box;
+	border: 0.5rem solid black;
+	background-color: white;
+
+	.mini & {
+		left: 0;
+		margin-left: 0; 
+		width: 100%;
+		border: none;
+		border-top: 0.5rem solid black;
+	}	
+
+	.big-contents { font-size: 2rem; }
+
+
+}
