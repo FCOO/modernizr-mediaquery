@@ -15,7 +15,7 @@ In contrast to traditional media queries this allows dynamic recalculation of th
 With modernizr-mediaquery the breakpoints are recalculated when the font-size of `<html>` is changed, and the breakpoint will still be at 30em witch now correspond to 720px. 
 
 
-This package contains of a JavaScript object `ModernizrMediaquery`, and a css-file `modernizr-mediaquery.css` with classes to hide or show elements for different 'media-queries' screen dimensions, orientations (portrait/landscape), and print.
+This package contains of a JavaScript object `ModernizrMediaquery`, and a scss-file `_modernizr-mediaquery.scss` with classes to hide or show elements for different 'media-queries' screen dimensions, orientations (portrait/landscape), and print.
 
 [Modernizr] must be included.
 
@@ -67,7 +67,25 @@ To remove a event use
 	myModernizrMediaquery.on('large-down', function(){ console.log('The screen is now large or smaller'); });
 
 
-### modernizr-mediaquery.css
+### _modernizr-mediaquery.scss
+
+Include the scc-file in your project by adding the following to your scss-file
+
+	//MODERNIZR-SASS - http://github.com/FCOO/modernizr-scss
+	@import "../bower_components/modernizr-scss/dist/modernizr-scss";
+
+	//Adjust default breatpoints (optional)
+	$breakpoints: (
+	  mini		:    0px,	//Phone portrait
+	  small		:  480px,	//Phone landscape
+	  medium	:  768px,	//Tablets portrait
+	  large		:  960px,	//Table landscape + desttop
+	  xlarge	: 1200px	//Large desttop
+	);
+ 
+	
+	//MODERNIZR-MEDIAQUERY - http://github.com/FCOO/modernizr-mediaquery
+	@import "../bower_components/modernizr-mediaquery/src/modernizr-mediaquery";
 
 The css-classes is based on the visibility classes by [ZURB Foundation](http://foundation.zurb.com/docs/components/visibility.html) and the syntax used by [Modernizr].
 

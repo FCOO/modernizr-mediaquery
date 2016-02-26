@@ -8,7 +8,6 @@
 	<meta http-equiv='x-dns-prefetch-control' content='on'>
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <link rel="stylesheet" type="text/css" href="../src/modernizr-mediaquery.css" />
   <link rel="stylesheet" type="text/css" href="demo.css" />
 </head>
 
@@ -81,6 +80,8 @@ CSS:
 			fontSize = oldFontSize+delta;
 			mmq.setHtmlFontSizePx( fontSize );
 
+			$(window).trigger('resize');
+
 		}
 
 
@@ -89,7 +90,7 @@ CSS:
 			Initialize/ready 
 			*******************************************/
 			$(function() { //"$( function() { ... });" is short for "$(document).ready( function(){...});"
-				$(window).on('resize.test', function(){ 
+				$(window).on('resize', function(){ 
 					$('#screen-size').html( 
 						window.innerWidth+'x'+window.innerHeight +'<br>' +
 						parseInt(window.innerWidth/fontSize)+'em x'+ parseInt(window.innerHeight/fontSize)+'em' 
