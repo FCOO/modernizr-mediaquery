@@ -8,7 +8,7 @@
 
 ****************************************************************************/
 
-;(function ($, window, document, /*Modernizr, */undefined) {
+;(function ($, window, document, undefined) {
 	"use strict";
 
 	//***********************************************
@@ -65,7 +65,7 @@
 
 		this.options = $.extend({
 			//Default options
-			VERSION							: "1.2.2",
+			VERSION							: "1.2.3",
 			DEBUG								: false,
 			'useWindowClientDim': true,
 			
@@ -204,5 +204,5 @@
 
 
 
-}(jQuery, this, document/*, Modernizr*/));
+}(jQuery, this, document));
 
