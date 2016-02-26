@@ -12,8 +12,11 @@
 
 
 $html-font-size		: 16px !default;
+$create-FOR-NO		: true !default; //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
+
 $create-FIRST-up	: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
 $create-LAST-down	: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+
 
 //Breakpoints taken from uikit
 $breakpoints: (

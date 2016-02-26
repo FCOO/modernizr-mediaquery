@@ -8,20 +8,23 @@
 
 ************************************************/
 
-//Adjust default variable values
-//$html-font-size		: 16px;
-//$create-FIRST-up	: false;	//When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
-//$create-LAST-down	: false;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+/* Default
+$html-font-size		: 16px !default;
+$create-FOR-NO		: true !default; //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
+
+$create-FIRST-up	: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+$create-LAST-down	: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+
 
 //Breakpoints taken from uikit
-//$breakpoints: (
-//  mini		:    0px,	//Phone portrait
-//  small		:  480px,	//Phone landscape
-//  medium	:  768px,	//Tablets portrait
-//  large		:  960px,	//Table landscape + desttop
-//  xlarge	: 1200px	//Large desttop
-//);
-
+$breakpoints: (
+  mini		:    0px,	//Phone portrait
+  small		:  480px,	//Phone landscape
+  medium	:  768px,	//Tablets portrait
+  large		:  960px,	//Table landscape + desttop
+  xlarge	: 1200px	//Large desttop
+) !default;
+*/
 @import "modernizr-mediaquery-variables";
 
 @import "modernizr-mediaquery-orientation-print";
@@ -64,7 +67,7 @@ $min-max-map: ();
 	}
 
 	//Add the rules for $name eq. .small show-on-small { display: block }
-	@include show-and-hide-for-modernizr-test( $name, html );
+	@include show-and-hide-for-modernizr-test( $name, html, $create-FOR-NO );
 	
 	//Adding the query to $media-queries-map
 	$media-queries-map: map-merge($media-queries-map, ($name: 'screen' + $mq));
@@ -77,7 +80,7 @@ $min-max-map: ();
 	@if not $is-last or $create-LAST-down {
 
 		//Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
-		@include show-and-hide-for-modernizr-test( $name-down, html );
+		@include show-and-hide-for-modernizr-test( $name-down, html, $create-FOR-NO );
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-down: 'screen' + $mq-down));
@@ -91,7 +94,7 @@ $min-max-map: ();
 	@if not $is-first or $create-FIRST-up {
 
 		//Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
-		@include show-and-hide-for-modernizr-test( $name-up, html );
+		@include show-and-hide-for-modernizr-test( $name-up, html, $create-FOR-NO );
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-up: 'screen' + $mq-up));
