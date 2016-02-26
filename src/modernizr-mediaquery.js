@@ -8,7 +8,7 @@
 
 ****************************************************************************/
 
-;(function ($, window, document, Modernizr, undefined) {
+;(function ($, window, document, /*Modernizr, */undefined) {
 	"use strict";
 
 	//***********************************************
@@ -204,5 +204,5 @@
 
 
 
-}(jQuery, this, document, Modernizr));
+}(jQuery, this, document/*, Modernizr*/));
 
