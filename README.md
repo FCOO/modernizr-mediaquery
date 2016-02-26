@@ -74,6 +74,13 @@ Include the scc-file in your project by adding the following to your scss-file
 	//MODERNIZR-SASS - http://github.com/FCOO/modernizr-scss
 	@import "../bower_components/modernizr-scss/dist/modernizr-scss";
 
+	//Adjust default options (optional)
+	$html-font-size		: 16px;
+	$create-FOR-NO		: true;  //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
+	$create-FIRST-up	: false; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+	$create-LAST-down	: false; //When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+	
+
 	//Adjust default breatpoints (optional)
 	$breakpoints: (
 	  mini		:    0px,	//Phone portrait
