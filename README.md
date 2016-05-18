@@ -77,8 +77,8 @@ Include the scc-file in your project by adding the following to your scss-file
 	//Adjust default options (optional)
 	$html-font-size		: 16px;
 	$create-FOR-NO		: true;  //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
-	$create-FIRST-up	: false; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
-	$create-LAST-down	: false; //When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+	$create-FIRST-up	: false; //When true the media query FIRST-up (always display) and no-FIRST-up (always hidden) are created
+	$create-LAST-down	: false; //When true the media query LAST-down (always display) and no-LAST-down (always hidden) are created
 	
 
 	//Adjust default breatpoints (optional)
@@ -86,8 +86,8 @@ Include the scc-file in your project by adding the following to your scss-file
 	  mini		:    0px,	//Phone portrait
 	  small		:  480px,	//Phone landscape
 	  medium	:  768px,	//Tablets portrait
-	  large		:  960px,	//Table landscape + desttop
-	  xlarge	: 1200px	//Large desttop
+	  large		:  960px,	//Table landscape + desktop
+	  xlarge	: 1200px	//Large desktop
 	);
  
 	
@@ -158,7 +158,7 @@ Two classes are provided
 
 #### Additional css and scss
 
-The classes in `modernizr-mediaquery.css` only controls the display of elements under sertent conditions.
+The classes in `modernizr-mediaquery.css` only controls the display of elements under certain conditions.
 But other properties can be controlled by using the `STATE` and `no-STATE` classes
 
 Example: To define a class `green-when-in-portrait` that displays a element in green when orientation is portrait:

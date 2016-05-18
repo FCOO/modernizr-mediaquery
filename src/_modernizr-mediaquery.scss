@@ -67,20 +67,23 @@ $min-max-map: ();
 	}
 
 	//Add the rules for $name eq. .small show-on-small { display: block }
-	@include show-and-hide-for-modernizr-test( $name, html, $create-FOR-NO );
-	
+	@media only screen {
+		@include show-and-hide-for-modernizr-test( $name, html, $create-FOR-NO );
+	}
+
 	//Adding the query to $media-queries-map
 	$media-queries-map: map-merge($media-queries-map, ($name: 'screen' + $mq));
 
 	//Adding the min-max to $min-max-map
 	$min-max-map: map-merge($min-max-map, ($name: $minPx+ '_' + $maxPx));
 
-	
 	//Adding classes for SIZE-down
 	@if not $is-last or $create-LAST-down {
 
 		//Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
-		@include show-and-hide-for-modernizr-test( $name-down, html, $create-FOR-NO );
+		@media only screen {
+			@include show-and-hide-for-modernizr-test( $name-down, html, $create-FOR-NO );
+		}
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-down: 'screen' + $mq-down));
@@ -94,7 +97,9 @@ $min-max-map: ();
 	@if not $is-first or $create-FIRST-up {
 
 		//Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
-		@include show-and-hide-for-modernizr-test( $name-up, html, $create-FOR-NO );
+		@media only screen {
+			@include show-and-hide-for-modernizr-test( $name-up, html, $create-FOR-NO );
+		}
 
 		//Adding the query to $media-queries-map
 		$media-queries-map: map-merge($media-queries-map, ($name-up: 'screen' + $mq-up));
@@ -102,7 +107,6 @@ $min-max-map: ();
 		//Adding the min-max to $min-max-map
 		$min-max-map: map-merge($min-max-map, ($name-up: $minPx+ '_0'));
 	}
-
 
 } //@for $i from 1 through length($bp-names) {...
 

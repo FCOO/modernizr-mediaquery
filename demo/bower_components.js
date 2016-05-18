@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v2.2.1
+ * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-02-22T19:11Z
+ * Date: 2016-04-05T19:26Z
  */
 
 (function( global, factory ) {
@@ -65,7 +65,7 @@ var support = {};
 
 
 var
-	version = "2.2.1",
+	version = "2.2.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -276,6 +276,7 @@ jQuery.extend( {
 	},
 
 	isPlainObject: function( obj ) {
+		var key;
 
 		// Not plain objects:
 		// - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -285,14 +286,18 @@ jQuery.extend( {
 			return false;
 		}
 
+		// Not own constructor property must be Object
 		if ( obj.constructor &&
-				!hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
+				!hasOwn.call( obj, "constructor" ) &&
+				!hasOwn.call( obj.constructor.prototype || {}, "isPrototypeOf" ) ) {
 			return false;
 		}
 
-		// If the function hasn't returned already, we're confident that
-		// |obj| is a plain object, created by {} or constructed with new Object
-		return true;
+		// Own properties are enumerated firstly, so to speed up,
+		// if last one is own, then all properties are own
+		for ( key in obj ) {}
+
+		return key === undefined || hasOwn.call( obj, key );
 	},
 
 	isEmptyObject: function( obj ) {
@@ -7325,6 +7330,12 @@ jQuery.extend( {
 	}
 } );
 
+// Support: IE <=11 only
+// Accessing the selectedIndex property
+// forces the browser to respect setting selected
+// on the option
+// The getter ensures a default option is selected
+// when in an optgroup
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
@@ -7333,6 +7344,16 @@ if ( !support.optSelected ) {
 				parent.parentNode.selectedIndex;
 			}
 			return null;
+		},
+		set: function( elem ) {
+			var parent = elem.parentNode;
+			if ( parent ) {
+				parent.selectedIndex;
+
+				if ( parent.parentNode ) {
+					parent.parentNode.selectedIndex;
+				}
+			}
 		}
 	};
 }
@@ -7527,7 +7548,8 @@ jQuery.fn.extend( {
 
 
 
-var rreturn = /\r/g;
+var rreturn = /\r/g,
+	rspaces = /[\x20\t\r\n\f]+/g;
 
 jQuery.fn.extend( {
 	val: function( value ) {
@@ -7603,9 +7625,15 @@ jQuery.extend( {
 		option: {
 			get: function( elem ) {
 
-				// Support: IE<11
-				// option.value not trimmed (#14858)
-				return jQuery.trim( elem.value );
+				var val = jQuery.find.attr( elem, "value" );
+				return val != null ?
+					val :
+
+					// Support: IE10-11+
+					// option.text throws exceptions (#14686, #14858)
+					// Strip and collapse whitespace
+					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+					jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
 			}
 		},
 		select: {
@@ -7658,7 +7686,7 @@ jQuery.extend( {
 				while ( i-- ) {
 					option = options[ i ];
 					if ( option.selected =
-							jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
+						jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
 					) {
 						optionSet = true;
 					}
@@ -9353,18 +9381,6 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 
 
-// Support: Safari 8+
-// In Safari 8 documents created via document.implementation.createHTMLDocument
-// collapse sibling forms: the second one becomes a child of the first one.
-// Because of that, this security measure has to be disabled in Safari 8.
-// https://bugs.webkit.org/show_bug.cgi?id=137337
-support.createHTMLDocument = ( function() {
-	var body = document.implementation.createHTMLDocument( "" ).body;
-	body.innerHTML = "<form></form><form></form>";
-	return body.childNodes.length === 2;
-} )();
-
-
 // Argument "data" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
@@ -9377,12 +9393,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		keepScripts = context;
 		context = false;
 	}
-
-	// Stop scripts or inline event handlers from being executed immediately
-	// by using document.implementation
-	context = context || ( support.createHTMLDocument ?
-		document.implementation.createHTMLDocument( "" ) :
-		document );
+	context = context || document;
 
 	var parsed = rsingleTag.exec( data ),
 		scripts = !keepScripts && [];
@@ -9464,7 +9475,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}
@@ -9829,4 +9840,120 @@ if ( !noGlobal ) {
 
 return jQuery;
 }));
-;!function(a,b,c,d){"use strict";function e(){var b;this.events={},this._loop=function(a,c,d){this.events[a]=this.events[a]||[];var e=this.events[a].length;if(d)for(b=e-1;b>=0&&!c(this.events[a][b],b,this.events[a]);b--);else for(b=0;e>b&&!c(this.events[a][b],b,this.events[a]);b++);},this.on=function(b,c,d,e){var f,g;for(b=(b||"").match(/\S+/g)||[""],g=0;g<b.length;g++)f=b[g],f&&(this.events[f]=this.events[f]||[],this.events[f].push({callback:c,context:d||null,options:a.extend({once:!1,first:!1,last:!1},e)}))},this.once=function(a,b,c){this.on(a,b,c,{once:!0})},this.onFirst=function(a,b,c){this.on(a,b,c,{first:!0})},this.onLast=function(a,b,c){this.on(a,b,c,{last:!0})},this.onceFirst=function(a,b,c){this.on(a,b,c,{once:!0,first:!0})},this.onceLast=function(a,b,c){this.on(a,b,c,{once:!0,last:!0})},this.off=function(a,b,c){var d,e,f;for(a=(a||"").match(/\S+/g)||[""],f=function(a,d,e){return b!=a.callback||c&&c!=a.context?void 0:(e.splice(d,1),!0)},e=0;e<a.length;e++)d=a[e],d&&this._loop(d,f)},this.fire=function(a){for(var b=[],c=1;c<arguments.length;c++)b.push(arguments[c]);this._loop(a,function(a){a.options.first&&a.callback.apply(a.context,b)}),this._loop(a,function(a){a.options.first||a.options.last||a.callback.apply(a.context,b)}),this._loop(a,function(a){a.options.last&&a.callback.apply(a.context,b)}),this._loop(a,function(a,b,c){a.options.once&&c.splice(b,1)},!0)},this.trigger=function(){this.fire(arguments)},this.one=function(){this.once(arguments)},this.oneFirst=function(){this.onceFirst(arguments)},this.oneLast=function(){this.onceLast(arguments)}}b.GlobalEvents=e}(jQuery,this,document);
+
+;
+/****************************************************************************
+	global-events, a plugin to administrate any events
+
+	(c) 2015, FCOO
+
+	https://github.com/FCOO/global-events
+	https://github.com/FCOO
+
+****************************************************************************/
+
+(function ($, window, document, undefined) {
+	"use strict";
+
+	function GlobalEvents( ) {
+		var i;
+		this.events = {};
+
+		this._loop = function _loop( eventName, func, reverse ){
+			this.events[eventName] = this.events[eventName] || []; 		
+			var lgd = this.events[eventName].length;
+			if (reverse){
+				for (i=lgd-1; i>=0; i-- )
+					if (func( this.events[eventName][i], i, this.events[eventName] ))
+					  break;
+			} else {
+				for (i=0; i<lgd; i++ )
+					if (func( this.events[eventName][i], i, this.events[eventName] ))
+					  break;
+			}
+		};
+
+		this.on = function on(eventNames, callback, context, options){
+			var eventName, i;
+			eventNames = ( eventNames || "" ).match( (/\S+/g) ) || [ "" ];
+			for (i=0; i<eventNames.length; i++ ){
+				eventName = eventNames[i];
+				if (eventName){
+					this.events[eventName] = this.events[eventName] || []; 		
+					this.events[eventName].push( {
+						callback: callback,
+						context	: context || null,
+						options	: $.extend( {once:false, first:false, last:false}, options ) 
+					});
+				}
+			}
+		};
+
+		this.once				= function once(			eventName, callback, context ) { this.on( eventName, callback, context, {	once:true 						} ); };
+		this.onFirst		= function onFirst(		eventName, callback, context ) { this.on( eventName, callback, context, {						 first:true	} ); };
+		this.onLast			= function onLast(		eventName, callback, context ) { this.on( eventName, callback, context, {						 last:true	} ); };
+		this.onceFirst	= function onceFirst(	eventName, callback, context ) { this.on( eventName, callback, context, { once:true, first:true	} ); };
+		this.onceLast		= function onceFirst(	eventName, callback, context ) { this.on( eventName, callback, context, { once:true, last:true	} ); };
+
+		this.off = function off(eventNames, callback, context){
+			var eventName, i, _loop_func;
+			eventNames = ( eventNames || "" ).match( (/\S+/g) ) || [ "" ];
+			_loop_func = function( eventObj, index, list ){
+				if ( (callback == eventObj.callback) &&
+					(!context || (context == eventObj.context)) ){ 
+					list.splice(index, 1);
+					return true;
+				}
+			};
+
+			for (i=0; i<eventNames.length; i++ ){
+				eventName = eventNames[i];
+				if (eventName){
+					this._loop( eventName, _loop_func );
+				}
+			}
+		};
+
+
+		this.fire = function fire( eventName /*, arg1, arg2, .., argN */ ){ 
+			var newArguments = [];
+			for (var i=1; i < arguments.length; i++) {
+				newArguments.push(arguments[i]);
+			}
+
+			//Fire the functions marked 'first'
+			this._loop( eventName, function( eventObj ){ 
+				if (eventObj.options.first)
+					eventObj.callback.apply( eventObj.context, newArguments );	  
+			});
+
+			//Fire the functions not marked 'first' or 'last'
+			this._loop( eventName, function( eventObj ){ 
+				if (!eventObj.options.first && !eventObj.options.last)
+					eventObj.callback.apply( eventObj.context, newArguments );	  
+			});
+
+			//Fire the functions marked 'last'
+			this._loop( eventName, function( eventObj ){ 
+				if (eventObj.options.last)
+					eventObj.callback.apply( eventObj.context, newArguments );	  
+			});
+			
+			//Remove all functions marked 'once'
+			this._loop( eventName, function( eventObj, index, list ){ 
+				if (eventObj.options.once)
+					list.splice(index, 1);
+			}, true);
+		};
+
+		this.trigger	= function(){ this.fire( arguments );				};
+		this.one			=	function(){	this.once( arguments );				};
+		this.oneFirst	= function(){	this.onceFirst( arguments );	};
+		this.oneLast	=	function(){	this.onceLast( arguments  );	};
+
+	}
+  
+  // expose access to the constructor
+  window.GlobalEvents = GlobalEvents;
+
+}(jQuery, this, document));
