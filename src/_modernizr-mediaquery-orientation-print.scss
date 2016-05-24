@@ -11,22 +11,22 @@
 ************************************************/
 
 
-// Orientation targeting - 'landscape' and 'portrait'
-@include -ms-show-and-hide( (landscape), false, true,  block);
-@include -ms-show-and-hide( (portrait),  false, false, block);
+// Orientation targeting - 'landscape' and 'portrait' - default is 'landscape'
+@include -ms-show-and-hide( (landscape), false, true,  block !important, $mdd-incl-table-display);
+@include -ms-show-and-hide( (portrait),  false, false, block !important, $mdd-incl-table-display);
 
 @media screen and (orientation: landscape) {
-	@include -ms-show-and-hide( (landscape), false, true,  block);
-	@include -ms-show-and-hide( (portrait),  false, false, block);
+	@include -ms-show-and-hide( (landscape), false, true,  block !important, $mdd-incl-table-display);
+	@include -ms-show-and-hide( (portrait),  false, false, block !important, $mdd-incl-table-display);
 }
 @media screen and (orientation: portrait) {
-	@include -ms-show-and-hide( (landscape), false, false, block);
-	@include -ms-show-and-hide( (portrait), false,  true,  block);
+	@include -ms-show-and-hide( (landscape), false, false, block !important, $mdd-incl-table-display);
+	@include -ms-show-and-hide( (portrait), false,  true,  block !important, $mdd-incl-table-display);
 }
 
 // Print visibility - default is display: none
 .show-for-print { display: none !important; }
 @media print {
-	@include -ms-show-and-hide( (print), false, true, block);
+	@include -ms-show-and-hide( (print), false, true, block !important, $mdd-incl-table-display);
 }
 

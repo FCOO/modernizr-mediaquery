@@ -65,7 +65,7 @@
 
 		this.options = $.extend({
 			//Default options
-			VERSION							: "1.2.5",
+			VERSION							: "1.2.6",
 			DEBUG								: false,
 			'useWindowClientDim': true,
 			

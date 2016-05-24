@@ -1,13 +1,13 @@
 {
   "name": "modernizr-mediaquery",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "homepage": "https://github.com/FCOO/modernizr-mediaquery",
   "authors": [
     "Niels Holt niels@steenbuchholt.dk"
   ],
   "description": "",
   "main": [
-    "dist/modernizr-mediaquery.min.js"
+    "dist/modernizr-mediaquery.js"
   ],
   "repository": {
     "type": "git",

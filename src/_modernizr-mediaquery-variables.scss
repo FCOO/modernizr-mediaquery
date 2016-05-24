@@ -11,11 +11,14 @@
 ************************************************/
 
 
-$html-font-size		: 16px !default;
-$create-FOR-NO		: true !default; //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
+$html-font-size					: 16px !default;
 
-$create-FIRST-up	: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
-$create-LAST-down	: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+$create-FIRST-up				: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+$create-LAST-down				: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+
+$mdd-display-value			: '' !default;		// Value for display:... when element is visible. Default = '' => no class created.
+$mdd-incl-no-selector		: true !default;	// if true classes for 'show-for-no-TEST are included
+$mdd-incl-table-display	: true !default;	// if true classes for table-elements (TABLE, TR,TD etc.) are included 
 
 
 //Breakpoints taken from uikit
