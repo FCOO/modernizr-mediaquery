@@ -75,11 +75,15 @@ Include the scc-file in your project by adding the following to your scss-file
 	@import "../bower_components/modernizr-scss/dist/modernizr-scss";
 
 	//Adjust default options (optional)
-	$html-font-size		: 16px;
-	$create-FOR-NO		: true;  //When true the display-classes for show-for-no-NAME / hide-for-no-NAME is also created. show-for-NAME and hide-for-NAME is always created
-	$create-FIRST-up	: false; //When true the media query FIRST-up (always display) and no-FIRST-up (always hidden) are created
-	$create-LAST-down	: false; //When true the media query LAST-down (always display) and no-LAST-down (always hidden) are created
-	
+	$html-font-size			: 16px;
+
+	$create-FIRST-up		: false; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+	$create-LAST-down		: false;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+
+	$mdd-display-value		: '';		// Value for display:... when element is visible. Default = '' => no class created.
+	$mdd-incl-no-selector	: true;	// if true classes for 'show-for-no-TEST are included
+	$mdd-incl-table-display	: true;	// if true classes for table-elements (TABLE, TR,TD etc.) are included 
+
 
 	//Adjust default breatpoints (optional)
 	$breakpoints: (
