@@ -51,7 +51,7 @@ $min-max-map: ();
 
 	//Add the rules for $name eq. .small show-on-small { display: block }
 	@media only screen {
-		@include show-and-hide-for-modernizr-test( $name, html, $mdd-incl-no-selector );
+		@include show-and-hide-for-modernizr-test( $name, html, $mdd-incl-no-selector, $mdd-incl-table-display );
 	}
 
 	//Adding the query to $media-queries-map
@@ -65,7 +65,7 @@ $min-max-map: ();
 
 		//Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
 		@media only screen {
-			@include show-and-hide-for-modernizr-test( $name-down, html, $mdd-incl-no-selector ); 
+			@include show-and-hide-for-modernizr-test( $name-down, html, $mdd-incl-no-selector, $mdd-incl-table-display ); 
 		}
 
 		//Adding the query to $media-queries-map
@@ -81,7 +81,7 @@ $min-max-map: ();
 
 		//Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
 		@media only screen {
-			@include show-and-hide-for-modernizr-test( $name-up, html, $mdd-incl-no-selector ); 
+			@include show-and-hide-for-modernizr-test( $name-up, html, $mdd-incl-no-selector, $mdd-incl-table-display ); 
 		}
 
 		//Adding the query to $media-queries-map
