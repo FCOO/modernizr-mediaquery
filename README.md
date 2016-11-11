@@ -205,16 +205,3 @@ Copyright (c) 2016 [FCOO](https://github.com/FCOO)
 ## Contact information
 
 Niels Holt nho@fcoo.dk
-
-
-## Credits and acknowledgements
-
-
-## Known bugs
-
-## Troubleshooting
-
-## Changelog
-
-
-

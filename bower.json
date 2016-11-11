@@ -1,35 +1,35 @@
 {
-    "name": "modernizr-mediaquery",
-    "version": "1.2.9",
-    "homepage": "https://github.com/FCOO/modernizr-mediaquery",
-    "authors": [
-        "Niels Holt niels@steenbuchholt.dk"
-    ],
-    "description": "",
-    "main": [
-        "dist/modernizr-mediaquery.js"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/FCOO/modernizr-mediaquery.git"
-    },
-    "dependencies": {
-        "jquery": "latest",
-        "global-events": "FCOO/global-events#latest",
-        "modernizr-javascript": "fcoo/modernizr-javascript#^1.1.0"
-    },
-    "devDependencies": {
-        "modernizr-scss": "https://github.com/FCOO/modernizr-scss.git#latest"
-    },
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "moduleType": [
-        "es6"
-    ]
+  "name": "modernizr-mediaquery",
+  "version": "1.2.10",
+  "homepage": "https://github.com/FCOO/modernizr-mediaquery",
+  "authors": [
+    "Niels Holt niels@steenbuchholt.dk"
+  ],
+  "description": "",
+  "main": [
+    "dist/modernizr-mediaquery.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FCOO/modernizr-mediaquery.git"
+  },
+  "dependencies": {
+    "jquery": "latest",
+    "global-events": "FCOO/global-events#latest",
+    "modernizr-javascript": "fcoo/modernizr-javascript#^1.1.0"
+  },
+  "devDependencies": {
+    "modernizr-scss": "https://github.com/FCOO/modernizr-scss.git#latest"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "es6"
+  ]
 }

@@ -1,16 +1,16 @@
 {
-    "name": "modernizr-mediaquery",
-    "version": "1.2.9",
-    "description": "package.json is only use for building the package. see bower.json for more info",
-    "author": "Niels Holt nho@fcoo.dk",
-    "license": "MIT",
-    "devDependencies": {
-        "grunt"                  : "^1.0.0",
-        "grunt-fcoo-grunt-plugin": "^2.0.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/FCOO/modernizr-mediaquery.git"
-    },
-    "homepage": "https://github.com/FCOO/modernizr-mediaquery"
+  "name": "modernizr-mediaquery",
+  "version": "1.2.10",
+  "description": "package.json is only use for building the package. see bower.json for more info",
+  "author": "Niels Holt nho@fcoo.dk",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.0",
+    "grunt-fcoo-grunt-plugin": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FCOO/modernizr-mediaquery.git"
+  },
+  "homepage": "https://github.com/FCOO/modernizr-mediaquery"
 }

@@ -81,8 +81,7 @@
         //'Reads the different min-max-intervalls from the css-file using the 'dummy' class "modernizr-mediaquery-min-max"
         meta      = $('<meta class="modernizr-mediaquery-min-max">').appendTo(document.head);
         mediaJSON = parseStyleToObject(meta.css('font-family'));
-console.log('HER>>>>', document.head, meta, mediaJSON);
-        //meta.remove();        
+        meta.remove();        
 
         this.minMaxRatioList = [];
         for (id in mediaJSON){
@@ -114,10 +113,10 @@ console.log('HER>>>>', document.head, meta, mediaJSON);
     ns.ModernizrMediaquery.prototype = {
 
         //Methods to add media-query-events
-        on  : function( mediaQueries, callback, context ){ this.globalEvents.on(  mediaQueries, callback, context ); },
-        off : function( mediaQueries, callback, context ){ this.globalEvents.off( mediaQueries, callback, context ); },
-        once: function( mediaQueries, callback, context ){ this.globalEvents.once(mediaQueries, callback, context ); },
-        one : function( mediaQueries, callback, context ){ this.globalEvents.one( mediaQueries, callback, context ); },
+        on  : function( mediaQueries, callback, context ){ this.globalEvents.on(   mediaQueries, callback, context ); },
+        off : function( mediaQueries, callback, context ){ this.globalEvents.off(  mediaQueries, callback, context ); },
+        once: function( mediaQueries, callback, context ){ this.globalEvents.once( mediaQueries, callback, context ); },
+        one : function( mediaQueries, callback, context ){ this.globalEvents.one(  mediaQueries, callback, context ); },
 
 
         setHtmlFontSizePx: function( fontSizePx ){ 
@@ -167,9 +166,7 @@ console.log('HER>>>>', document.head, meta, mediaJSON);
             for (i=0; i<list.length; i++ ){
                 listElem = list[i];
                 isOn = isOnFunc(listElem);
-                $('html')
-                    .toggleClass(                listElem.id,  isOn    )
-                    .toggleClass( 'no-'+listElem.id, !isOn    );
+                window.modernizrToggle( listElem.id,  isOn );
 
                 if (isOn && !listElem.on)
                     //Fire event
