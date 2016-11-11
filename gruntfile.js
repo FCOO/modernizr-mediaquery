@@ -1,7 +1,7 @@
 /***********************************************
-gruntfile.js for {%= name %}
+gruntfile.js for modernizr-mediaquery
 
-https://github.com/FCOO/{%= name %}
+https://github.com/FCOO/modernizr-mediaquery
 
 ***********************************************/
 

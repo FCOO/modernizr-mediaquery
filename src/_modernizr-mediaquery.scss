@@ -1,10 +1,10 @@
 /***********************************************
-	modernizr-mediaquery.scss, 
+    modernizr-mediaquery.scss, 
 
-	(c) 2015, FCOO
+    (c) 2015, FCOO
 
-	https://github.com/FCOO/modernizr-mediaquery
-	https://github.com/FCOO
+    https://github.com/FCOO/modernizr-mediaquery
+    https://github.com/FCOO
 
 ************************************************/
 
@@ -21,90 +21,89 @@ $min-max-map: ();
 
 //Add css for SIZE, SIZE-down, and SIZE-up
 @for $i from 1 through length($bp-names) {
-	$is-first: $i == 1;
-	$is-last: $i == length($bp-names);
+    $is-first: $i == 1;
+    $is-last : $i == length($bp-names);
 
-	$name			: nth($bp-names, $i);
-	$name-up	: $name + '-up';
-	$name-down: $name + '-down';
+    $name     : nth($bp-names, $i);
+    $name-up  : $name + '-up';
+    $name-down: $name + '-down';
 
-	$minPx: nth($bp-min-values, $i);
-	$min	: -mmq-px-to-em( $minPx );
-	$maxPx: 0px;
-	$max	: 0em;
-	@if not $is-last {
-		$maxPx:	nth($bp-min-values, $i+1) - 1;
-		$max	: -mmq-px-to-em( $maxPx );
-	}
-	$mq			: '';
-	$mq-up	: '';
-	$mq-down: '';
+    $minPx: nth($bp-min-values, $i);
+    $min  : -mmq-px-to-em( $minPx );
+    $maxPx: 0px;
+    $max  : 0em;
+    @if not $is-last {
+        $maxPx: nth($bp-min-values, $i+1) - 1;
+        $max  : -mmq-px-to-em( $maxPx );
+    }
+    $mq     : '';
+    $mq-up  : '';
+    $mq-down: '';
 
-	@if $min > 0em {
-		$mq		: $mq			+ ' and (min-width: #{$min})';
-		$mq-up: $mq-up	+ ' and (min-width: #{$min})';
-	}
-	@if $max > 0em {
-		$mq			: $mq				+ ' and (max-width: #{$max})';
-		$mq-down: $mq-down	+ ' and (max-width: #{$max})';
-	}
+    @if $min > 0em {
+        $mq   : $mq    + ' and (min-width: #{$min})';
+        $mq-up: $mq-up + ' and (min-width: #{$min})';
+    }
+    @if $max > 0em {
+        $mq     : $mq      + ' and (max-width: #{$max})';
+        $mq-down: $mq-down + ' and (max-width: #{$max})';
+    }
 
-	//Add the rules for $name eq. .small show-on-small { display: block }
-	@media only screen {
-		@include show-and-hide-for-modernizr-test( $name, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display );
-	}
+    //Add the rules for $name eq. .small show-on-small { display: block }
+    @media only screen {
+        @include show-and-hide-for-modernizr-test( $name, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display );
+    }
 
-	//Adding the query to $media-queries-map
-	$media-queries-map: map-merge($media-queries-map, ($name: 'screen' + $mq));
+    //Adding the query to $media-queries-map
+    $media-queries-map: map-merge($media-queries-map, ($name: 'screen' + $mq));
 
-	//Adding the min-max to $min-max-map
-	$min-max-map: map-merge($min-max-map, ($name: $minPx+ '_' + $maxPx));
+    //Adding the min-max to $min-max-map
+    $min-max-map: map-merge($min-max-map, ($name: $minPx+ '_' + $maxPx));
 
-	//Adding classes for SIZE-down
-	@if not $is-last or $create-LAST-down {
+    //Adding classes for SIZE-down
+    @if not $is-last or $create-LAST-down {
 
-		//Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
-		@media only screen {
-			@include show-and-hide-for-modernizr-test( $name-down, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display ); 
-		}
+        //Add the rules for $name-down eq. .large-down show-on-large-down { display: block }
+        @media only screen {
+            @include show-and-hide-for-modernizr-test( $name-down, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display ); 
+        }
 
-		//Adding the query to $media-queries-map
-		$media-queries-map: map-merge($media-queries-map, ($name-down: 'screen' + $mq-down));
-		
-		//Adding the min-max to $min-max-map
-		$min-max-map: map-merge($min-max-map, ($name-down: '0_' + $maxPx));
+        //Adding the query to $media-queries-map
+        $media-queries-map: map-merge($media-queries-map, ($name-down: 'screen' + $mq-down));
+        
+        //Adding the min-max to $min-max-map
+        $min-max-map: map-merge($min-max-map, ($name-down: '0_' + $maxPx));
 
-	}
+    }
 
-	//Adding classes for SIZE-up
-	@if not $is-first or $create-FIRST-up {
+    //Adding classes for SIZE-up
+    @if not $is-first or $create-FIRST-up {
 
-		//Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
-		@media only screen {
-			@include show-and-hide-for-modernizr-test( $name-up, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display ); 
-		}
+        //Add the rules for $name-up eq. .medium-up show-on-medium-up { display: block }
+        @media only screen {
+            @include show-and-hide-for-modernizr-test( $name-up, html, $mdd-incl-no-selector, $mdd-display-value, $mdd-incl-table-display ); 
+        }
 
-		//Adding the query to $media-queries-map
-		$media-queries-map: map-merge($media-queries-map, ($name-up: 'screen' + $mq-up));
+        //Adding the query to $media-queries-map
+        $media-queries-map: map-merge($media-queries-map, ($name-up: 'screen' + $mq-up));
 
-		//Adding the min-max to $min-max-map
-		$min-max-map: map-merge($min-max-map, ($name-up: $minPx+ '_0'));
-	}
+        //Adding the min-max to $min-max-map
+        $min-max-map: map-merge($min-max-map, ($name-up: $minPx+ '_0'));
+    }
 
 } //@for $i from 1 through length($bp-names) {...
 
 
 //Adding the orientation-queries to $media-queries-map
-$media-queries-map: map-merge( $media-queries-map, ('landscape'	: 'screen and (orientation: landscape)'));
-$media-queries-map: map-merge( $media-queries-map, ('portrait'	: 'screen and (orientation: portrait)'));
+$media-queries-map: map-merge( $media-queries-map, ('landscape': 'screen and (orientation: landscape)'));
+$media-queries-map: map-merge( $media-queries-map, ('portrait' : 'screen and (orientation: portrait)'));
 
 //Adding the orientation-queries to $min-max-map
 $min-max-map: map-merge($min-max-map, ('landscape': '0_1_1' ));
-$min-max-map: map-merge($min-max-map, ('portrait'	: '0_1_0_1' ));
+$min-max-map: map-merge($min-max-map, ('portrait' : '0_1_0_1' ));
 
 
 // The media-query-list ($media-queries-map) and min-max-list ($min-max-map) are applied to a <meta> tag, which is read by the ModernizrMediaquery js-object-class. Applied from Foundation 6
-.modernizr-mediaquery-media-query	{	font-family: -mmq-serialize($media-queries-map);	}
-.modernizr-mediaquery-min-max			{	font-family: -mmq-serialize($min-max-map);				}
-
+.modernizr-mediaquery-media-query { font-family: -mmq-serialize($media-queries-map); }
+.modernizr-mediaquery-min-max     { font-family: -mmq-serialize($min-max-map);       }
 

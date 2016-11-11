@@ -4,246 +4,25 @@ DEMO.scss for github/fcoo/modernizr-mediaquery/demo/index.html
 
 */
 /***********************************************
-	modernizr-mediaquery-pure.scss, 
+    modernizr-mediaquery-pure.scss, 
 
-	(c) 2015, FCOO
+    (c) 2015, FCOO
 
-	https://github.com/FCOO/modernizr-mediaquery
-	https://github.com/FCOO
-
-************************************************/
-/***********************************************
-	modernizr-mediaquery-variables.scss, 
-
-	(c) 2015, FCOO
-
-	https://github.com/FCOO/modernizr-mediaquery
-	https://github.com/FCOO
-
-	Variables and functions to create modernizr-mediaquery.css and modernizr-mediaquery-pure.css
+    https://github.com/FCOO/modernizr-mediaquery
+    https://github.com/FCOO
 
 ************************************************/
 /***********************************************
-	_modernizr-mediaquery-orientation_print.scss, 
+    modernizr-mediaquery-variables.scss, 
 
-	(c) 2015, FCOO
+    (c) 2015, FCOO
 
-	https://github.com/FCOO/modernizr-mediaquery
-	https://github.com/FCOO
+    https://github.com/FCOO/modernizr-mediaquery
+    https://github.com/FCOO
 
-	Media-query for orientation and print
+    Variables and functions to create modernizr-mediaquery.css and modernizr-mediaquery-pure.css
 
 ************************************************/
-.show-for-landscape {
-  display: block !important;
-}
-
-.hide-for-landscape {
-  display: none !important;
-}
-
-table.show-for-landscape {
-  display: table;
-}
-
-thead.show-for-landscape {
-  display: table-header-group;
-}
-
-tbody.show-for-landscape {
-  display: table-row-group;
-}
-
-tr.show-for-landscape {
-  display: table-row;
-}
-
-td.show-for-landscape,
-th.show-for-landscape {
-  display: table-cell;
-}
-
-.hide-for-portrait {
-  display: block !important;
-}
-
-.show-for-portrait {
-  display: none !important;
-}
-
-table.hide-for-portrait {
-  display: table;
-}
-
-thead.hide-for-portrait {
-  display: table-header-group;
-}
-
-tbody.hide-for-portrait {
-  display: table-row-group;
-}
-
-tr.hide-for-portrait {
-  display: table-row;
-}
-
-td.hide-for-portrait,
-th.hide-for-portrait {
-  display: table-cell;
-}
-
-@media screen and (orientation: landscape) {
-  .show-for-landscape {
-    display: block !important;
-  }
-
-  .hide-for-landscape {
-    display: none !important;
-  }
-
-  table.show-for-landscape {
-    display: table;
-  }
-
-  thead.show-for-landscape {
-    display: table-header-group;
-  }
-
-  tbody.show-for-landscape {
-    display: table-row-group;
-  }
-
-  tr.show-for-landscape {
-    display: table-row;
-  }
-
-  td.show-for-landscape,
-  th.show-for-landscape {
-    display: table-cell;
-  }
-
-  .hide-for-portrait {
-    display: block !important;
-  }
-
-  .show-for-portrait {
-    display: none !important;
-  }
-
-  table.hide-for-portrait {
-    display: table;
-  }
-
-  thead.hide-for-portrait {
-    display: table-header-group;
-  }
-
-  tbody.hide-for-portrait {
-    display: table-row-group;
-  }
-
-  tr.hide-for-portrait {
-    display: table-row;
-  }
-
-  td.hide-for-portrait,
-  th.hide-for-portrait {
-    display: table-cell;
-  }
-}
-@media screen and (orientation: portrait) {
-  .hide-for-landscape {
-    display: block !important;
-  }
-
-  .show-for-landscape {
-    display: none !important;
-  }
-
-  table.hide-for-landscape {
-    display: table;
-  }
-
-  thead.hide-for-landscape {
-    display: table-header-group;
-  }
-
-  tbody.hide-for-landscape {
-    display: table-row-group;
-  }
-
-  tr.hide-for-landscape {
-    display: table-row;
-  }
-
-  td.hide-for-landscape,
-  th.hide-for-landscape {
-    display: table-cell;
-  }
-
-  .show-for-portrait {
-    display: block !important;
-  }
-
-  .hide-for-portrait {
-    display: none !important;
-  }
-
-  table.show-for-portrait {
-    display: table;
-  }
-
-  thead.show-for-portrait {
-    display: table-header-group;
-  }
-
-  tbody.show-for-portrait {
-    display: table-row-group;
-  }
-
-  tr.show-for-portrait {
-    display: table-row;
-  }
-
-  td.show-for-portrait,
-  th.show-for-portrait {
-    display: table-cell;
-  }
-}
-.show-for-print {
-  display: none !important;
-}
-
-@media print {
-  .show-for-print {
-    display: block !important;
-  }
-
-  .hide-for-print {
-    display: none !important;
-  }
-
-  table.show-for-print {
-    display: table;
-  }
-
-  thead.show-for-print {
-    display: table-header-group;
-  }
-
-  tbody.show-for-print {
-    display: table-row-group;
-  }
-
-  tr.show-for-print {
-    display: table-row;
-  }
-
-  td.show-for-print,
-  th.show-for-print {
-    display: table-cell;
-  }
-}
 @media screen and (max-width: 29.9375em) {
   .hide-for-mini {
     display: none !important;

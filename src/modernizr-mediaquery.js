@@ -81,7 +81,8 @@
         //'Reads the different min-max-intervalls from the css-file using the 'dummy' class "modernizr-mediaquery-min-max"
         meta      = $('<meta class="modernizr-mediaquery-min-max">').appendTo(document.head);
         mediaJSON = parseStyleToObject(meta.css('font-family'));
-        meta.remove();        
+console.log('HER>>>>', document.head, meta, mediaJSON);
+        //meta.remove();        
 
         this.minMaxRatioList = [];
         for (id in mediaJSON){

@@ -1,55 +1,55 @@
 /***********************************************
-	modernizr-mediaquery-variables.scss, 
+    modernizr-mediaquery-variables.scss, 
 
-	(c) 2015, FCOO
+    (c) 2015, FCOO
 
-	https://github.com/FCOO/modernizr-mediaquery
-	https://github.com/FCOO
+    https://github.com/FCOO/modernizr-mediaquery
+    https://github.com/FCOO
 
-	Variables and functions to create modernizr-mediaquery.css and modernizr-mediaquery-pure.css
+    Variables and functions to create modernizr-mediaquery.css and modernizr-mediaquery-pure.css
 
 ************************************************/
 
 
-$html-font-size					: 16px !default;
+$html-font-size         : 16px !default;
 
-$create-FIRST-up				: false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
-$create-LAST-down				: false !default;	//When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
+$create-FIRST-up        : false !default; //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created
+$create-LAST-down       : false !default; //When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created
 
-$mdd-display-value			: '' !default;		// Value for display:... when element is visible. Default = '' => no class created.
-$mdd-incl-no-selector		: true !default;	// if true classes for 'show-for-no-TEST are included
-$mdd-incl-table-display	: true !default;	// if true classes for table-elements (TABLE, TR,TD etc.) are included 
+$mdd-display-value      : '' !default;    // Value for display:... when element is visible. Default = '' => no class created.
+$mdd-incl-no-selector   : true !default;  // if true classes for 'show-for-no-TEST are included
+$mdd-incl-table-display : true !default;  // if true classes for table-elements (TABLE, TR,TD etc.) are included 
 
 
 //Breakpoints taken from uikit
 $breakpoints: (
-  mini		:    0px,	//Phone portrait
-  small		:  480px,	//Phone landscape
-  medium	:  768px,	//Tablets portrait
-  large		:  960px,	//Table landscape + desttop
-  xlarge	: 1200px	//Large desttop
+  mini   :    0px, //Phone portrait
+  small  :  480px, //Phone landscape
+  medium :  768px, //Tablets portrait
+  large  :  960px, //Table landscape + desttop
+  xlarge : 1200px  //Large desttop
 ) !default;
 
 
 
 //******************************************************
 @function strip-unit($number) {
-	@if type-of($number) == 'number' and not unitless($number) {
-		@return $number / ($number * 0 + 1);
-	}
-	@return $number;
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
 }
 
 //******************************************************
 // Converts a pixel or unitless value to em, for use in breakpoints.
 @function -mmq-px-to-em($value) {
-	//$base: $html-font-size;
-	//@if unit($base) == '%' {
-	//	$base: ($base / 100%) * 16px;
-	//}
+    //$base: $html-font-size;
+    //@if unit($base) == '%' {
+    //    $base: ($base / 100%) * 16px;
+    //}
   //@return strip-unit($value) / strip-unit($base) * 1em;
 
-	@return strip-unit($value) / strip-unit($html-font-size) * 1em;
+    @return strip-unit($value) / strip-unit($html-font-size) * 1em;
 }
 
 //******************************************************
@@ -69,7 +69,7 @@ $breakpoints: (
 $bp-names: ();
 $bp-min-values: ();
 @each $size in map-keys($breakpoints) {
-	$bp-names			: append( $bp-names, $size );
-	$bp-min-values: append( $bp-min-values, map-get($breakpoints, $size) );
+    $bp-names     : append( $bp-names, $size );
+    $bp-min-values: append( $bp-min-values, map-get($breakpoints, $size) );
 }
 
