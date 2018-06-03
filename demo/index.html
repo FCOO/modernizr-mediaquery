@@ -18,7 +18,7 @@
     </div>
     <div id="info" style="width: 10em;">
         <div id="screen-size" class="center"></div>
-        
+
         <div class="center show-for-landscape">LANDSCAPE</div>
         <div class="center show-for-portrait">PORTRAIT</div>
 
@@ -65,7 +65,7 @@ CSS:
     <div class="big-contents center hide-for-mini-down">This is the BIG version</div>
     <div class="small-contents center show-for-mini-down">small version</div>
 </div>
-    
+
 <script src="bower_components.js"></script>
 <script src="../src/modernizr-mediaquery.js"></script>
 <script src="modernizr-custom.js"></script>
@@ -82,27 +82,36 @@ CSS:
 
     (function ($, window, document, undefined) {
         /******************************************
-        Initialize/ready 
+        Initialize/ready
         *******************************************/
         $(function() { //"$( function() { ... });" is short for "$(document).ready( function(){...});"
-            $(window).on('resize', function(){ 
-                $('#screen-size').html( 
+            $(window).on('resize', function(){
+                $('#screen-size').html(
                     window.innerWidth+'x'+window.innerHeight +'<br>' +
-                    parseInt(window.innerWidth/fontSize)+'em x'+ parseInt(window.innerHeight/fontSize)+'em' 
-                ); 
+                    parseInt(window.innerWidth/fontSize)+'em x'+ parseInt(window.innerHeight/fontSize)+'em'
+                );
             });
-        
-            mmq = new window.ModernizrMediaquery({DEBUG: true});
-            mmq.on( 'landscape portrait', function( m ){ 
+
+            mmq = new window.ModernizrMediaquery({
+                    breakpoints: {
+                        mini   :    0, //Phone portrait
+                        small  :  480, //Phone landscape
+                        medium :  768, //Tablets portrait
+                        large  :  960, //Table landscape + desttop
+                        xlarge : 1200  //Large desttop
+                    }
+                  });
+
+            mmq.on( 'landscape portrait', function( m ){
                 console.log('Is now in '+m+'-mode') ;
             });
             mmq._onMediaQuery();
 
-            $(window).trigger('resize'); 
+            $(window).trigger('resize');
 
         }); //End of initialize/ready
 
-    }(jQuery, this, document));    
+    }(jQuery, this, document));
 </script>
 
 </body>

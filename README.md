@@ -17,7 +17,12 @@ With modernizr-mediaquery the breakpoints are recalculated when the font-size of
 
 This package contains of a JavaScript object `ModernizrMediaquery`, and a scss-file `_modernizr-mediaquery.scss` with classes to hide or show elements for different 'media-queries' screen dimensions, orientations (portrait/landscape), and print.
 
+`ModernizrMediaquery` will try to 'read' the breakpoints defined in css (see `_modernizr-mediaquery.scss` below) by creating a hidden html-elements and retrieve the info via a 'dummy' css-property.
+This will only work correctly if the css is fully loaded when `ModernizrMediaquery` is initialized.
+If the JavaScript and css files are loaded asynchronous the css may not be available when `ModernizrMediaquery` is initialized. Instead the breakpoints and other options must be given in `options` for `ModernizrMediaquery` (See below)    
+
 [Modernizr] must be included.
+
 
 
 ## Installation
@@ -38,9 +43,28 @@ http://FCOO.github.io/modernizr-mediaquery/demo/
 	{ useWindowClientDim: true	}
 
 #### Properties
-| Id | Description |
+| Id | Type | Description |
 | :--: | --- |
-| <code>useWindowClientDim</code>| **true**: Use `window.clientWidth()` and `windowe.clientHeight()` to determinate the *state* of the screen<br>**false**: Use `Modernizr.md( mediaquery )` to determinate the *state* of the screen |
+| `useWindowClientDim`| `boolean` | **true**: Use `window.clientWidth()` and `windowe.clientHeight()` to determinate the *state* of the screen<br>**false**: Use `Modernizr.md( mediaquery )` to determinate the *state* of the screen |
+| `htmlFontSize` | `integer` | Default = 16. If `options.breakpoints` are given it **must** match `$html-font-size` (see below) |
+| `createFIRSTup` | `boolean` | If `options.breakpoints` are given it **must** match `$create-FIRST-up` (see below) |
+| `createLASTdown` | `boolean` | If `options.breakpoints` are given it **must** match `$create-LAST-down` (see below) |
+| `breakpoints` | `JSON-object` | If given if **must** match `$breakpoints` (See example and below) |
+
+##### Example
+	options = {
+		useWindowClientDim: true, 
+		htmlFontSize      : 16,
+		createFIRSTup     : false,
+		createLASTdown    : false,
+		breakpoints: {
+	  		mini  :    0,	//Phone portrait
+	  		small :  480,	//Phone landscape
+	  		medium:  768,	//Tablets portrait
+	  		large :  960,	//Table landscape + desktop
+	  		xlarge: 1200	//Large desktop
+		}
+	}
 
 
 #### Methods
