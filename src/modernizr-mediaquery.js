@@ -158,12 +158,8 @@
 
         //Set the 'change media-query event'
         $(window).on('resize.mmq', $.proxy( this._onMediaQuery, this ));
-        var THIS = this;
 
-        $(function() {
-            THIS._onMediaQuery();
-        });
-
+        this._onMediaQuery();
     }
 
     // expose access to the constructor

@@ -58,7 +58,7 @@
 
         this.options = $.extend({
             //Default options
-            VERSION             : "1.3.0",
+            VERSION             : "1.3.1",
             htmlFontSize        : 16,
             createFIRSTup       : false, //When true the media query FIRST-up (allway display) and no-FIRST-up (allways hidden) are created. MUST MATCH $create-FIRST-up
             createLASTdown      : false, //When true the media query LAST-down (allway display) and no-LAST-down (allways hidden) are created. MUST MATCH $create-LAST-down
@@ -158,12 +158,8 @@
 
         //Set the 'change media-query event'
         $(window).on('resize.mmq', $.proxy( this._onMediaQuery, this ));
-        var THIS = this;
 
-        $(function() {
-            THIS._onMediaQuery();
-        });
-
+        this._onMediaQuery();
     }
 
     // expose access to the constructor
